@@ -24,6 +24,38 @@ const PAGES = [
   'disclaimer.html'
 ];
 
+// Marker constants for clean, idempotent replacement
+const LANG_SWITCHER_START = '<!-- LANG_SWITCHER_START -->';
+const LANG_SWITCHER_END = '<!-- LANG_SWITCHER_END -->';
+
+const MOBILE_SWITCHER_START = '<!-- MOBILE_LANG_SWITCHER_START -->';
+const MOBILE_SWITCHER_END = '<!-- MOBILE_LANG_SWITCHER_END -->';
+
+const HREFLANG_START = '<!-- HREFLANG_START -->';
+const HREFLANG_END = '<!-- HREFLANG_END -->';
+
+const REDIRECT_START = '<!-- ACCEPT_LANG_REDIRECT_START -->';
+const REDIRECT_END = '<!-- ACCEPT_LANG_REDIRECT_END -->';
+
+function getFlagSvg(code) {
+  switch (code) {
+    case 'en':
+      return `<svg class="lang-flag-svg" viewBox="0 0 640 480" width="16" height="12"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="m75 0 244 181L562 0h78v62L439 240l201 178v62h-78L319 299 75 480H0v-62l201-178L0 62V0h75z"/><path fill="#C8102E" d="m424 288 216 161v31h-40L384 319v-31h40zM640 31 424 192h-40v-31L600 0h40v31zM0 449l216-161h40v31L40 480H0v-31zm0-418L216 192h40v-31L40 0H0v31z"/><path fill="#FFF" d="M240 0h160v480H240zM0 160h640v160H0z"/><path fill="#C8102E" d="M267 0h106v480H267zM0 187h640v106H0z"/></svg>`;
+    case 'ar':
+      return `<svg class="lang-flag-svg" viewBox="0 0 640 480" width="16" height="12"><path fill="#00732f" d="M0 0h640v160H0z"/><path fill="#fff" d="M0 160h640v160H0z"/><path fill="#000" d="M0 320h640v160H0z"/><path fill="#f00" d="M0 0h160v480H0z"/></svg>`;
+    case 'zh':
+      return `<svg class="lang-flag-svg" viewBox="0 0 640 480" width="16" height="12"><path fill="#ee1c25" d="M0 0h640v480H0z"/><path fill="#ffde00" d="M120 160l-37.6 27.3 14.4-44.2-37.6-27.4h46.5L120 71.4l14.4 44.3h46.5l-37.6 27.4 14.4 44.2zM200 48l-4.2 13.9 14.4.7-11.4 8.7 4.2 13.9-11.8-8.1-11.8 8.1 4.2-13.9-11.4-8.7 14.4-.7zM240 96l-7.4 12.5 13.2 5.7-14.3 1.5.8 14.5-9.6-10.9-13.9 4 7.4-12.5-9.6-10.9 14.3 1.5zM240 176l-11.8 8.2.8 14.5-9.6-10.9-13.9 4 7.4-12.5-9.6-10.9 14.3 1.5 5.8-13.3 4.2 13.9zM200 240l-4.2 13.9 14.4.7-11.4 8.7 4.2 13.9-11.8-8.1-11.8 8.1 4.2-13.9-11.4-8.7 14.4-.7z"/></svg>`;
+    case 'es':
+      return `<svg class="lang-flag-svg" viewBox="0 0 640 480" width="16" height="12"><path fill="#aa151b" d="M0 0h640v480H0z"/><path fill="#f1bf00" d="M0 120h640v240H0z"/></svg>`;
+    case 'ru':
+      return `<svg class="lang-flag-svg" viewBox="0 0 640 480" width="16" height="12"><path fill="#fff" d="M0 0h640v160H0z"/><path fill="#0039a6" d="M0 160h640v160H0z"/><path fill="#d52b1e" d="M0 320h640v160H0z"/></svg>`;
+    case 'fr':
+      return `<svg class="lang-flag-svg" viewBox="0 0 640 480" width="16" height="12"><path fill="#002395" d="M0 0h213.3v480H0z"/><path fill="#fff" d="M213.3 0h213.4v480H213.3z"/><path fill="#ed2939" d="M426.7 0H640v480H426.7z"/></svg>`;
+    default:
+      return '';
+  }
+}
+
 function getPageUrl(lang, pageName) {
   const prefix = lang === 'en' ? '' : `/${lang}`;
   if (pageName === 'index.html') {
@@ -43,24 +75,23 @@ function generateHreflangTags(pageName) {
   for (const langCode of Object.keys(LANGUAGES)) {
     tags += `  <link rel="alternate" hreflang="${langCode}" href="${getFullPageUrl(langCode, pageName)}">\n`;
   }
-  return tags;
+  return tags.trimEnd();
 }
 
 function generateLanguageSwitcher(currentLang, pageName) {
-  const currentLangObj = LANGUAGES[currentLang];
+  const currentFlagSvg = getFlagSvg(currentLang);
   let items = '';
   for (const [code, lang] of Object.entries(LANGUAGES)) {
     const targetUrl = getPageUrl(code, pageName);
     const isActive = code === currentLang ? ' active' : '';
-    items += `          <li><a href="${targetUrl}" class="lang-dropdown-item${isActive}" data-lang="${code}" role="menuitem"><span class="lang-flag">${lang.flag}</span><span class="lang-name">${lang.name}</span><span class="lang-native">${lang.nativeName}</span></a></li>\n`;
+    const flagSvg = getFlagSvg(code);
+    items += `            <li><a href="${targetUrl}" class="lang-dropdown-item${isActive}" data-lang="${code}" role="menuitem"><span class="lang-flag">${flagSvg}</span><span class="lang-name">${lang.name}</span><span class="lang-native">${lang.nativeName}</span></a></li>\n`;
   }
 
-  return `
-        <!-- Multilingual Language Switcher -->
-        <div class="lang-switcher">
+  return `        <div class="lang-switcher">
           <button type="button" class="lang-switcher-btn" aria-haspopup="true" aria-expanded="false" aria-label="Select Language">
-            <span class="lang-flag">${currentLangObj.flag}</span>
-            <span class="lang-code">${currentLangObj.code.toUpperCase()}</span>
+            <span class="lang-flag">${currentFlagSvg}</span>
+            <span class="lang-code">${currentLang.toUpperCase()}</span>
             <svg class="lang-arrow" viewBox="0 0 320 512"><path d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"/></svg>
           </button>
           <ul class="lang-dropdown-menu" role="menu">
@@ -73,16 +104,17 @@ function generateMobileLanguageSwitcher(currentLang, pageName) {
   for (const [code, lang] of Object.entries(LANGUAGES)) {
     const targetUrl = getPageUrl(code, pageName);
     const isActive = code === currentLang ? ' active' : '';
-    links += `        <a href="${targetUrl}" class="mobile-lang-link${isActive}" data-lang="${code}"><span class="lang-flag">${lang.flag}</span> <span>${lang.nativeName}</span></a>\n`;
+    const flagSvg = getFlagSvg(code);
+    links += `          <a href="${targetUrl}" class="mobile-lang-link${isActive}" data-lang="${code}"><span class="lang-flag">${flagSvg}</span> <span>${lang.nativeName}</span></a>\n`;
   }
 
-  return `
-      <!-- Mobile Drawer Language Selector -->
-      <div class="mobile-lang-switcher">
-        <h5>${currentLang === 'ar' ? 'اختر اللغة' : (currentLang === 'zh' ? '选择语言' : (currentLang === 'es' ? 'Seleccionar Idioma' : (currentLang === 'ru' ? 'Выберите язык' : (currentLang === 'fr' ? 'Choisir la langue' : 'Select Language'))))}</h5>
-        <div class="mobile-lang-grid">
-${links}        </div>
-      </div>`;
+  const headingText = currentLang === 'ar' ? 'اختر اللغة' : (currentLang === 'zh' ? '选择语言' : (currentLang === 'es' ? 'Seleccionar Idioma' : (currentLang === 'ru' ? 'Выберите язык' : (currentLang === 'fr' ? 'Choisir la langue' : 'Select Language'))));
+
+  return `        <div class="mobile-lang-switcher">
+          <h5>${headingText}</h5>
+          <div class="mobile-lang-grid">
+${links}          </div>
+        </div>`;
 }
 
 const ROOT_REDIRECT_SCRIPT = `
@@ -121,7 +153,7 @@ function localizeHtml(html, lang, pageName) {
   // 1. Update <html lang="..." dir="...">
   localized = localized.replace(/<html[^>]*>/i, `<html lang="${lang}"${langObj.dir === 'rtl' ? ' dir="rtl"' : ''}>`);
 
-  // 2. Inject RTL CSS stylesheet if Arabic
+  // 2. Inject RTL CSS stylesheet if Arabic, remove for LTR
   if (langObj.dir === 'rtl') {
     if (!localized.includes('/css/rtl.css')) {
       localized = localized.replace(/<link rel="stylesheet" href="\/css\/style\.css">/i, '<link rel="stylesheet" href="/css/style.css">\n  <link rel="stylesheet" href="/css/rtl.css">');
@@ -147,18 +179,20 @@ function localizeHtml(html, lang, pageName) {
     }
   }
 
-  // 4. Update Canonical URL
+  // 4. Update Canonical URL & Social URLs
   const canonicalUrl = getFullPageUrl(lang, pageName);
   localized = localized.replace(/<link rel="canonical" href="[^"]*">/i, `<link rel="canonical" href="${canonicalUrl}">`);
   localized = localized.replace(/<meta property="og:url" content="[^"]*">/i, `<meta property="og:url" content="${canonicalUrl}">`);
   localized = localized.replace(/<meta name="twitter:url" content="[^"]*">/i, `<meta name="twitter:url" content="${canonicalUrl}">`);
 
-  // 5. Replace existing or inject hreflang cluster tags
+  // 5. Replace existing or inject hreflang cluster tags with exact bounded markers
   const hreflangBlock = generateHreflangTags(pageName);
-  if (localized.includes('<!-- Bidirectional Multilingual Hreflang Cluster Matrix -->')) {
-    localized = localized.replace(/<!-- Bidirectional Multilingual Hreflang Cluster Matrix -->[\s\S]*?(?=<meta name="robots"|<link rel="canonical"|<link rel="icon")/i, hreflangBlock);
+  const fullHreflangSection = `${HREFLANG_START}\n${hreflangBlock}\n  ${HREFLANG_END}`;
+  if (localized.includes(HREFLANG_START)) {
+    const reHreflang = new RegExp(`${HREFLANG_START}[\\s\\S]*?${HREFLANG_END}`, 'i');
+    localized = localized.replace(reHreflang, fullHreflangSection);
   } else {
-    localized = localized.replace(/<link rel="canonical"[^>]*>/i, (match) => `${hreflangBlock}${match}`);
+    localized = localized.replace(/<link rel="canonical"[^>]*>/i, (match) => `${fullHreflangSection}\n  ${match}`);
   }
 
   // 6. Update OpenGraph Locale
@@ -250,7 +284,7 @@ function localizeHtml(html, lang, pageName) {
     const statsT = {
       gold: { ar: "ذهب خالص مفحوص", zh: "化验纯金交付", es: "Oro Puro Ensayado", ru: "Опробованное Золото", fr: "Or Pur Titré" },
       delivery: { ar: "شحن وتوصيل عالمي", zh: "全球安全交付", es: "Entrega Global Segura", ru: "Глобальная Доставка", fr: "Livraison Mondiale" },
-      licenses: { ar: "تراخيص تعدين معتمدة", zh: "官方采矿资质", es: "Licencias Mineras", ru: "Горные Лицензии", fr: "Permis Miniers" },
+      licenses: { ar: "تراخيص تعدين معتمدة", zh: "官方采矿资质", es: "Licencias Mineras", ru: "Permis Miniers" },
       partners: { ar: "شركاء حول العالم", zh: "全球合作伙伴", es: "Socios Globales", ru: "Партнеры по Всему Миру", fr: "Partenaires Internationaux" }
     };
     if (statsT.gold[lang]) {
@@ -272,32 +306,62 @@ function localizeHtml(html, lang, pageName) {
     localized = localized.replace(/"@context": "https:\/\/schema\.org"/g, `"@context": "https://schema.org",\n    "inLanguage": "${lang}"`);
   }
 
-  // 8. Inject Language Switcher in Top Bar (Done after linkMap to protect switcher URLs)
+  // 8. Inject / Update Language Switcher in .header-actions with bounded markers
   const switcherHtml = generateLanguageSwitcher(lang, pageName);
-  if (localized.includes('<!-- Multilingual Language Switcher -->')) {
-    localized = localized.replace(/<!-- Multilingual Language Switcher -->[\s\S]*?<\/div>\s*<\/div>/i, switcherHtml.trim());
-  } else if (localized.includes('<div class="top-bar-socials">')) {
-    localized = localized.replace('<div class="top-bar-socials">', `<div class="top-bar-socials">\n${switcherHtml}`);
+  const fullSwitcherBlock = `${LANG_SWITCHER_START}\n${switcherHtml}\n        ${LANG_SWITCHER_END}`;
+  if (localized.includes(LANG_SWITCHER_START)) {
+    const reSwitcher = new RegExp(`${LANG_SWITCHER_START}[\\s\\S]*?${LANG_SWITCHER_END}`, 'i');
+    localized = localized.replace(reSwitcher, fullSwitcherBlock);
+  } else if (localized.includes('<div class="header-actions">')) {
+    localized = localized.replace('<div class="header-actions">', `<div class="header-actions">\n${fullSwitcherBlock}`);
   }
 
-  // 9. Inject Mobile Language Switcher into Mobile Navigation Drawer
-  const mobileSwitcherHtml = generateMobileLanguageSwitcher(lang, pageName);
-  if (localized.includes('<!-- Mobile Drawer Language Selector -->')) {
-    localized = localized.replace(/<!-- Mobile Drawer Language Selector -->[\s\S]*?<\/div>\s*<\/div>/i, mobileSwitcherHtml.trim());
-  } else if (localized.includes('</nav>') && localized.includes('mobile-nav-drawer')) {
-    localized = localized.replace(/(<div class="mobile-nav-drawer[^>]*>[\s\S]*?)(<\/aside>|<\/div>\s*<!-- SITE HEADER -->|<\/div>\s*<!-- MAIN HEADER -->)/i, (m, p1, p2) => `${p1}\n${mobileSwitcherHtml}\n${p2}`);
+  // 9. Inject / Update Mobile Language Switcher into Mobile Navigation Drawer (if drawer exists)
+  if (localized.includes('mobile-nav-drawer')) {
+    const mobileSwitcherHtml = generateMobileLanguageSwitcher(lang, pageName);
+    const fullMobileBlock = `${MOBILE_SWITCHER_START}\n${mobileSwitcherHtml}\n      ${MOBILE_SWITCHER_END}`;
+    if (localized.includes(MOBILE_SWITCHER_START)) {
+      const reMobile = new RegExp(`${MOBILE_SWITCHER_START}[\\s\\S]*?${MOBILE_SWITCHER_END}`, 'i');
+      localized = localized.replace(reMobile, fullMobileBlock);
+    } else {
+      // Safely append after the disclaimer link inside .mobile-nav-links
+      localized = localized.replace(/(<a[^>]*disclaimer\.html[^>]*>.*?<\/a>)/i, `$1\n${fullMobileBlock}`);
+    }
   }
 
   // 10. If English root page index.html, inject the smart redirect script
   if (lang === 'en' && pageName === 'index.html') {
-    if (!localized.includes('buygold_lang_detected')) {
-      localized = localized.replace('</head>', `${ROOT_REDIRECT_SCRIPT}\n</head>`);
+    const fullRedirectBlock = `${REDIRECT_START}\n${ROOT_REDIRECT_SCRIPT}\n  ${REDIRECT_END}`;
+    if (localized.includes(REDIRECT_START)) {
+      const reRedirect = new RegExp(`${REDIRECT_START}[\\s\\S]*?${REDIRECT_END}`, 'i');
+      localized = localized.replace(reRedirect, fullRedirectBlock);
+    } else {
+      localized = localized.replace('</head>', `  ${fullRedirectBlock}\n</head>`);
     }
   } else {
-    localized = localized.replace(ROOT_REDIRECT_SCRIPT, '');
+    // Remove redirect script from localized pages or inner pages
+    if (localized.includes(REDIRECT_START)) {
+      const reRedirect = new RegExp(`\\s*${REDIRECT_START}[\\s\\S]*?${REDIRECT_END}`, 'gi');
+      localized = localized.replace(reRedirect, '');
+    }
   }
 
   return localized;
+}
+
+function validateHtml(filePath, html) {
+  const openDivs = (html.match(/<div[\s>]/gi) || []).length;
+  const closeDivs = (html.match(/<\/div>/gi) || []).length;
+  if (openDivs !== closeDivs) {
+    throw new Error(`CRITICAL TAG MISMATCH in ${filePath}: ${openDivs} <div> opened vs ${closeDivs} </div> closed! Aborting to protect layout.`);
+  }
+  if (!html.includes('class="main-header"')) {
+    throw new Error(`CRITICAL DOM LOSS in ${filePath}: .main-header is missing! Aborting to protect layout.`);
+  }
+  if (!html.includes('class="lang-switcher"')) {
+    throw new Error(`CRITICAL ERROR in ${filePath}: .lang-switcher is missing! Aborting.`);
+  }
+  return true;
 }
 
 function generateMultilingualSitemap() {
@@ -338,7 +402,7 @@ function generateMultilingualSitemap() {
 async function run() {
   console.log('--- STARTING BUYGOLD I18N PRE-RENDERER ---');
 
-  // Ensure language directories exist in root and public
+  // Ensure language directories exist in root
   const targetLangs = ['ar', 'zh', 'es', 'ru', 'fr'];
   for (const lang of targetLangs) {
     const langDir = path.join(ROOT_DIR, lang);
@@ -357,15 +421,17 @@ async function run() {
 
     // Update English master file with language switcher & hreflang
     const updatedEnglish = localizeHtml(masterHtml, 'en', pageName);
+    validateHtml(pageName, updatedEnglish);
     fs.writeFileSync(srcFilePath, updatedEnglish, 'utf8');
-    console.log(`[EN] Updated root master: ${pageName}`);
+    console.log(`[EN] Updated & validated root master: ${pageName}`);
 
-    // Generate localized version for each other language
+    // Generate localized version for each target language
     for (const lang of targetLangs) {
       const localizedContent = localizeHtml(masterHtml, lang, pageName);
       const destPath = path.join(ROOT_DIR, lang, pageName);
+      validateHtml(`${lang}/${pageName}`, localizedContent);
       fs.writeFileSync(destPath, localizedContent, 'utf8');
-      console.log(`[${lang.toUpperCase()}] Pre-rendered: ${lang}/${pageName}`);
+      console.log(`[${lang.toUpperCase()}] Pre-rendered & validated: ${lang}/${pageName}`);
     }
   }
 

@@ -13,7 +13,7 @@ server.listen(3456, async () => {
     }, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
-      res.on('end', () => resolve({ status: res.statusCode, location: res.headers.location, data: data.substring(0, 200) }));
+      res.on('end', () => resolve({ status: res.statusCode, location: res.headers.location, data: data.substring(0, 1500) }));
     });
   });
 
