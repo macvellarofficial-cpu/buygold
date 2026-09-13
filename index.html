@@ -5,9 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BUYGOLD – Your Reliable Gold Mining &amp; Processing Partner in Uganda</title>
   <meta name="description" content="BUYGOLD is a leading Ugandan enterprise specialized in ethical gold mining & processing, sustainable agriculture, engineering, and global logistics.">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/buygold_icon.svg">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/buygold_icon.svg">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/buygold_icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/buygold_icon.svg">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* Critical FOUC prevention */
+    svg { max-width: 100%; display: inline-block; vertical-align: middle; }
+    .top-bar-item svg, .top-bar-social svg { width: 14px; height: 14px; }
+    .footer-icon-circle svg, .footer-social-icons svg { width: 18px; height: 18px; }
+    .contact-info-icon svg { width: 28px; height: 28px; }
+    .whatsapp-btn svg { width: 32px; height: 32px; }
+    .brand-logo img { height: 52px; width: auto; }
+  </style>
 </head>
 <body>
 
@@ -49,7 +58,7 @@
   <header class="main-header">
     <div class="container header-inner">
       <a href="index.html" class="brand-logo">
-        <img src="assets/images/buygold_logo.svg" alt="BUYGOLD Logo">
+        <img src="/assets/images/buygold_logo.svg" alt="BUYGOLD Logo">
       </a>
 
       <nav class="desktop-nav">
@@ -82,7 +91,7 @@
     </button>
     
     <div class="offcanvas-logo">
-      <img src="assets/images/buygold_logo_light.svg" alt="BUYGOLD">
+      <img src="/assets/images/buygold_logo_light.svg" alt="BUYGOLD">
     </div>
 
     <p class="offcanvas-bio">
@@ -144,7 +153,7 @@
   <!-- MOBILE NAVIGATION DRAWER -->
   <div class="mobile-nav-drawer">
     <div class="mobile-nav-header">
-      <img src="assets/images/buygold_logo.svg" alt="Logo" style="height: 42px;">
+      <img src="/assets/images/buygold_logo.svg" alt="Logo" style="height: 42px;">
       <button class="mobile-nav-close" aria-label="Close Mobile Nav" style="background:none; border:none; font-size:22px; cursor:pointer;">&times;</button>
     </div>
     <div class="mobile-nav-links">
@@ -210,7 +219,7 @@
     <div class="container partner-grid">
       <div class="partner-visual">
         <div class="partner-img-frame">
-          <img src="assets/images/Untitled-design-8-1024x683.jpg" alt="Raw Gold Nuggets in Hands - BUYGOLD">
+          <img src="/assets/images/Untitled-design-8-1024x683.jpg" alt="Raw Gold Nuggets in Hands - BUYGOLD">
         </div>
       </div>
       <div class="partner-content">
@@ -239,7 +248,7 @@
       <div class="values-grid">
         <div class="value-card">
           <div class="value-card-img">
-            <img src="assets/images/Untitled-design-5.jpg" alt="Integrity & Transparency">
+            <img src="/assets/images/Untitled-design-5.jpg" alt="Integrity & Transparency">
           </div>
           <div class="value-card-body">
             <h3>Integrity &amp; Transparency</h3>
@@ -253,7 +262,7 @@
 
         <div class="value-card">
           <div class="value-card-img">
-            <img src="assets/images/Untitled-design-6.jpg" alt="Safety & Compliance">
+            <img src="/assets/images/Untitled-design-6.jpg" alt="Safety & Compliance">
           </div>
           <div class="value-card-body">
             <h3>Safety &amp; Compliance</h3>
@@ -267,7 +276,7 @@
 
         <div class="value-card">
           <div class="value-card-img">
-            <img src="assets/images/Untitled-design-7.jpg" alt="Community Centred Approach">
+            <img src="/assets/images/Untitled-design-7.jpg" alt="Community Centred Approach">
           </div>
           <div class="value-card-body">
             <h3>Community Centred Approach</h3>
@@ -333,7 +342,7 @@
           </div>
         </div>
         <div class="reach-out-img">
-          <img src="assets/images/Untitled-design-3.jpg" alt="Reach out to BUYGOLD">
+          <img src="/assets/images/Untitled-design-3.jpg" alt="Reach out to BUYGOLD">
         </div>
       </div>
     </div>
@@ -502,6 +511,6 @@
     <span class="arrow-icon">&#8593;</span>
   </div>
 
-  <script src="js/main.js"></script>
+  <script src="/js/main.js"></script>
 </body>
 </html>

@@ -5,9 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us – BUYGOLD</title>
   <meta name="description" content="Learn about BUYGOLD: Our story, mission, core values, and vision for sustainable gold mining, agriculture, engineering, and logistics in Uganda.">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/buygold_icon.svg">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/buygold_icon.svg">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/buygold_icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/buygold_icon.svg">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* Critical FOUC prevention */
+    svg { max-width: 100%; display: inline-block; vertical-align: middle; }
+    .top-bar-item svg, .top-bar-social svg { width: 14px; height: 14px; }
+    .footer-icon-circle svg, .footer-social-icons svg { width: 18px; height: 18px; }
+    .contact-info-icon svg { width: 28px; height: 28px; }
+    .whatsapp-btn svg { width: 32px; height: 32px; }
+    .brand-logo img { height: 52px; width: auto; }
+  </style>
 </head>
 <body>
 
@@ -41,7 +50,7 @@
   <header class="main-header">
     <div class="container header-inner">
       <a href="index.html" class="brand-logo">
-        <img src="assets/images/buygold_logo.svg" alt="BUYGOLD Logo">
+        <img src="/assets/images/buygold_logo.svg" alt="BUYGOLD Logo">
       </a>
 
       <nav class="desktop-nav">
@@ -70,7 +79,7 @@
   <div class="offcanvas-drawer">
     <button class="offcanvas-close" aria-label="Close Sidebar">&times;</button>
     <div class="offcanvas-logo">
-      <img src="assets/images/buygold_logo_light.svg" alt="BUYGOLD">
+      <img src="/assets/images/buygold_logo_light.svg" alt="BUYGOLD">
     </div>
     <p class="offcanvas-bio">
       At BUYGOLD, we specialize in delivering innovative, compliant, and sustainable solutions across gold mining, agriculture, engineering, and logistics.
@@ -131,7 +140,7 @@
     <div class="container about-story-grid">
       <div class="about-img-group">
         <div class="about-img-main">
-          <img src="assets/images/hands-1024x683.jpg" alt="Business Partnership - BUYGOLD">
+          <img src="/assets/images/hands-1024x683.jpg" alt="Business Partnership - BUYGOLD">
         </div>
       </div>
 
@@ -202,7 +211,7 @@
 
       <div class="vision-visual-wrap">
         <div class="vision-img-frame">
-          <img src="assets/images/Untitled-design-1-1024x683.jpg" alt="Gold in Palm - BUYGOLD">
+          <img src="/assets/images/Untitled-design-1-1024x683.jpg" alt="Gold in Palm - BUYGOLD">
         </div>
         <div class="floating-stat-badge">
           <div class="stat-icon">
@@ -301,7 +310,7 @@
     <span class="arrow-icon">&#8593;</span>
   </div>
 
-  <script src="js/main.js"></script>
+  <script src="/js/main.js"></script>
 
   <!-- WHATSAPP FLOATING CHAT BUTTON -->
   <a href="https://wa.me/256762079775?text=Hello%20BUYGOLD%2C%20I%20am%20interested%20in%20your%20gold%20mining%20and%20investment%20services." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat with BUYGOLD on WhatsApp">

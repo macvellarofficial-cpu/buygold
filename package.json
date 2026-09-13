@@ -1,19 +1,18 @@
 {
-  "name": "alitihad-investments",
+  "name": "buygold-website",
   "version": "1.0.0",
-  "description": "Al' itihaad Investments - Official Website Clone",
-  "main": "server.js",
+  "description": "BUYGOLD - Official Corporate Website (www.buygold.blog)",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node dev-server.js",
+    "dev": "node dev-server.js"
   },
   "keywords": [
     "gold-mining",
-    "agri-business",
-    "logistics",
-    "engineering",
+    "gold-bullion",
+    "buygold",
+    "investments",
     "uganda"
   ],
-  "author": "Al' itihaad Investments",
+  "author": "BUYGOLD",
   "license": "ISC"
 }
