@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.buygold.blog/sitemap.xml
+Host: https://www.buygold.blog

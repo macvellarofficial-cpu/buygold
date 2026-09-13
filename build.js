@@ -27,6 +27,8 @@ const items = [
   'engineering.html',
   'contact-us.html',
   'disclaimer.html',
+  'sitemap.xml',
+  'robots.txt',
   'css',
   'js',
   'assets'

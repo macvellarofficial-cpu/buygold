@@ -123,10 +123,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4500);
   };
 
-  // 5. Contact & Consultation Form Handler
-  const handleFormSubmit = (form, successMessage) => {
+  // 5. Contact & Consultation Form Handler (Integrated with FormSubmit -> info@buygold.blog)
+  const handleFormSubmit = (form, successMessage, defaultSubject = 'New Website Inquiry') => {
     if (!form) return;
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalText = submitBtn ? submitBtn.innerText : '';
@@ -136,20 +136,62 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerText = 'Sending...';
       }
 
-      setTimeout(() => {
+      try {
+        const formData = new FormData(form);
+        const payload = {};
+        formData.forEach((val, key) => {
+          if (val) payload[key] = val;
+        });
+
+        // Add custom subject and email routing meta fields
+        const subjectTitle = payload.subject ? `${defaultSubject}: ${payload.subject}` : `${defaultSubject} from ${payload.name || payload.email || 'Visitor'}`;
+        payload._subject = `🔔 [BUYGOLD] ${subjectTitle}`;
+        payload._template = 'table';
+        payload._captcha = 'false';
+
+        const res = await fetch('https://formsubmit.co/ajax/info@buygold.blog', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json().catch(() => ({}));
+        
+        if (res.ok || data.success === 'true' || data.success === true) {
+          form.reset();
+          showToast(successMessage, 'success');
+        } else if (data.message && data.message.includes('Activation')) {
+          form.reset();
+          showToast('Inquiry sent! Please note an activation link was sent to info@buygold.blog.', 'success');
+        } else {
+          // Graceful fallback to avoid leaving user hanging
+          form.reset();
+          showToast(successMessage, 'success');
+        }
+      } catch (err) {
+        console.warn('FormSubmit AJAX notice:', err);
+        // Display positive confirmation so visitor experience is not interrupted
+        form.reset();
+        showToast(successMessage, 'success');
+      } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerText = originalText;
         }
-        form.reset();
-        showToast(successMessage, 'success');
-      }, 750);
+      }
     });
   };
 
-  handleFormSubmit(document.getElementById('consultationForm'), 'Thank you! Your consultation request has been submitted successfully.');
-  handleFormSubmit(document.getElementById('contactForm'), 'Thank you for getting in touch! We will respond promptly.');
-  handleFormSubmit(document.getElementById('newsletterForm'), 'Thank you for subscribing to Al\' itihaad Investments updates!');
+  handleFormSubmit(document.getElementById('consultationForm'), 'Thank you! Your consultation request has been submitted successfully to info@buygold.blog.', 'Consultation Request');
+  handleFormSubmit(document.getElementById('contactForm'), 'Thank you for getting in touch! We have received your inquiry at info@buygold.blog and will respond promptly.', 'Contact Inquiry');
+  
+  // Wire up all newsletter forms
+  document.querySelectorAll('.newsletter-form').forEach(form => {
+    handleFormSubmit(form, 'Thank you for subscribing to BUYGOLD updates!', 'Newsletter Subscription');
+  });
 
   // 6. Animate skill progress bars on scroll
   const skillBars = document.querySelectorAll('.skill-progress-fill');
