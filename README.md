@@ -38,9 +38,7 @@ Official corporate website for **BUYGOLD Investments Limited**, engineered for h
 ### 2. Running Locally
 ```bash
 # Start the local server
-npm start
-# or
-node server.js
+node scripts/dev-server.js
 ```
 
 Open your browser and navigate to:
