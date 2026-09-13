@@ -18,6 +18,14 @@ function copyRecursive(src, dest) {
   }
 }
 
+// Run i18n pre-rendering compilation
+try {
+  const i18n = require('./scripts/generate-i18n');
+  i18n.run();
+} catch (e) {
+  console.warn('i18n build notice:', e.message);
+}
+
 const items = [
   'index.html',
   'about-us.html',
@@ -27,6 +35,11 @@ const items = [
   'engineering.html',
   'contact-us.html',
   'disclaimer.html',
+  'ar',
+  'zh',
+  'es',
+  'ru',
+  'fr',
   'sitemap.xml',
   'robots.txt',
   'css',

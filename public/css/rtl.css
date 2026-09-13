@@ -1,0 +1,123 @@
+/* ==========================================================================
+   AL' ITIHAAD / BUYGOLD - ARABIC (RTL) STYLESHEET
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap');
+
+html[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] body {
+  font-family: 'Tajawal', 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif;
+  text-align: right;
+}
+
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] h5,
+html[dir="rtl"] h6 {
+  font-family: 'Cairo', 'Tajawal', sans-serif;
+  letter-spacing: 0;
+}
+
+/* Maintain proper direction for phone numbers, emails, and numeric data */
+html[dir="rtl"] a[href^="tel:"],
+html[dir="rtl"] a[href^="mailto:"],
+html[dir="rtl"] .phone-number,
+html[dir="rtl"] .stat-num,
+html[dir="rtl"] .stat-number {
+  direction: ltr !important;
+  display: inline-block;
+  unicode-bidi: embed;
+}
+
+/* Header & Top Bar */
+html[dir="rtl"] .top-bar-left {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+html[dir="rtl"] .top-bar-item svg {
+  margin-right: 0;
+  margin-left: 6px;
+}
+
+html[dir="rtl"] .main-nav {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+html[dir="rtl"] .nav-link {
+  margin-left: 0;
+  margin-right: 1.5rem;
+}
+
+/* Language Switcher Dropdown in RTL */
+html[dir="rtl"] .lang-dropdown-menu {
+  right: auto;
+  left: 0;
+}
+
+/* Flip arrows and directional icons */
+html[dir="rtl"] .btn-arrow svg,
+html[dir="rtl"] .arrow-icon svg,
+html[dir="rtl"] .btn svg:last-child {
+  transform: rotate(180deg);
+}
+
+/* Lists and checkmarks */
+html[dir="rtl"] .feature-list li svg,
+html[dir="rtl"] .check-list li svg {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+/* Float WhatsApp button */
+html[dir="rtl"] .whatsapp-float {
+  right: auto;
+  left: 28px;
+}
+
+/* Offcanvas & Mobile Nav drawers */
+html[dir="rtl"] .offcanvas-drawer,
+html[dir="rtl"] .mobile-nav-drawer {
+  right: auto;
+  left: 0;
+  transform: translateX(-100%);
+}
+
+html[dir="rtl"] .offcanvas-drawer.active,
+html[dir="rtl"] .mobile-nav-drawer.active {
+  transform: translateX(0);
+}
+
+/* Form layout */
+html[dir="rtl"] .contact-input-field,
+html[dir="rtl"] .form-control,
+html[dir="rtl"] .newsletter-input {
+  text-align: right;
+}
+
+/* Footer newsletter button */
+html[dir="rtl"] .newsletter-btn svg {
+  transform: rotate(180deg);
+}
+
+/* Breadcrumb dividers */
+html[dir="rtl"] .breadcrumb-separator svg {
+  transform: rotate(180deg);
+}
+
+/* Cards & Info items */
+html[dir="rtl"] .contact-info-block {
+  text-align: right;
+}
+
+html[dir="rtl"] .contact-info-icon {
+  margin-right: 0;
+  margin-left: 16px;
+}

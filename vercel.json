@@ -1,3 +1,44 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/ar/من-نحن", "destination": "/ar/about-us.html" },
+    { "source": "/ar/تعدين-الذهب", "destination": "/ar/mining.html" },
+    { "source": "/ar/الزراعة-والأعمال-الزراعية", "destination": "/ar/agri-business.html" },
+    { "source": "/ar/سلاسل-الإمداد-واللوجستيات", "destination": "/ar/supply-and-logistics.html" },
+    { "source": "/ar/خدمات-الهندسة-والإنشاءات", "destination": "/ar/engineering.html" },
+    { "source": "/ar/اتصل-بنا", "destination": "/ar/contact-us.html" },
+    { "source": "/ar/إخلاء-المسؤولية-القانونية", "destination": "/ar/disclaimer.html" },
+
+    { "source": "/zh/关于我们", "destination": "/zh/about-us.html" },
+    { "source": "/zh/黄金开采", "destination": "/zh/mining.html" },
+    { "source": "/zh/现代农业", "destination": "/zh/agri-business.html" },
+    { "source": "/zh/物流供应链", "destination": "/zh/supply-and-logistics.html" },
+    { "source": "/zh/工程建设", "destination": "/zh/engineering.html" },
+    { "source": "/zh/联系我们", "destination": "/zh/contact-us.html" },
+    { "source": "/zh/法律免责声明", "destination": "/zh/disclaimer.html" },
+
+    { "source": "/es/sobre-nosotros", "destination": "/es/about-us.html" },
+    { "source": "/es/mineria-de-oro", "destination": "/es/mining.html" },
+    { "source": "/es/agroindustria", "destination": "/es/agri-business.html" },
+    { "source": "/es/suministro-y-logistica", "destination": "/es/supply-and-logistics.html" },
+    { "source": "/es/ingenieria", "destination": "/es/engineering.html" },
+    { "source": "/es/contacto", "destination": "/es/contact-us.html" },
+    { "source": "/es/descargo-de-responsabilidad", "destination": "/es/disclaimer.html" },
+
+    { "source": "/ru/o-nas", "destination": "/ru/about-us.html" },
+    { "source": "/ru/dobycha-zolota", "destination": "/ru/mining.html" },
+    { "source": "/ru/agrobiznes", "destination": "/ru/agri-business.html" },
+    { "source": "/ru/logistika", "destination": "/ru/supply-and-logistics.html" },
+    { "source": "/ru/inzheneriya", "destination": "/ru/engineering.html" },
+    { "source": "/ru/kontakty", "destination": "/ru/contact-us.html" },
+    { "source": "/ru/otkaz-ot-otvetstvennosti", "destination": "/ru/disclaimer.html" },
+
+    { "source": "/fr/a-propos", "destination": "/fr/about-us.html" },
+    { "source": "/fr/mines-dor", "destination": "/fr/mining.html" },
+    { "source": "/fr/agro-industrie", "destination": "/fr/agri-business.html" },
+    { "source": "/fr/chaine-logistique", "destination": "/fr/supply-and-logistics.html" },
+    { "source": "/fr/ingenierie", "destination": "/fr/engineering.html" },
+    { "source": "/fr/contactez-nous", "destination": "/fr/contact-us.html" },
+    { "source": "/fr/mentions-legales", "destination": "/fr/disclaimer.html" }
+  ]
 }

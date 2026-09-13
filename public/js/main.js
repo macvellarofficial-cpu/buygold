@@ -90,9 +90,41 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileNavClose.addEventListener('click', closeOffcanvas);
   }
 
-  // Escape key closes modals
+  // Escape key closes modals and dropdowns
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeOffcanvas();
+    if (e.key === 'Escape') {
+      closeOffcanvas();
+      document.querySelectorAll('.lang-switcher').forEach(s => s.classList.remove('active'));
+    }
+  });
+
+  // 3.5 Language Switcher Dropdown Interaction
+  const langSwitchers = document.querySelectorAll('.lang-switcher');
+  langSwitchers.forEach(switcher => {
+    const btn = switcher.querySelector('.lang-switcher-btn');
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = switcher.classList.contains('active');
+        langSwitchers.forEach(s => s.classList.remove('active'));
+        if (!isOpen) switcher.classList.add('active');
+      });
+    }
+  });
+
+  document.addEventListener('click', () => {
+    langSwitchers.forEach(s => s.classList.remove('active'));
+  });
+
+  // Store preferred language when any language link is clicked
+  document.querySelectorAll('[data-lang]').forEach(link => {
+    link.addEventListener('click', () => {
+      const targetLang = link.getAttribute('data-lang');
+      if (targetLang) {
+        localStorage.setItem('preferred_lang', targetLang);
+        document.cookie = `buygold_lang=${targetLang};path=/;max-age=31536000;SameSite=Lax`;
+      }
+    });
   });
 
   // 4. Toast Notifications System
