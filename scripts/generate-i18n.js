@@ -10,6 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 const { LANGUAGES, PAGES_META, UI_STRINGS } = require('./i18n-dictionary');
+const { applyBodyTranslations } = require('./i18n-content');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const BASE_URL = 'https://www.buygold.blog';
@@ -296,14 +297,30 @@ function localizeHtml(html, lang, pageName) {
 
     // Footer
     const footerT = UI_STRINGS.footer;
-    localized = localized.replace(/<h4>Contact Info<\/h4>/g, `<h4>${footerT.contactInfo[lang]}</h4>`);
-    localized = localized.replace(/<h4>Quick Links<\/h4>/g, `<h4>${footerT.quickLinks[lang]}</h4>`);
-    localized = localized.replace(/<h4>Our Sectors<\/h4>/g, `<h4>${footerT.ourSectors[lang]}</h4>`);
-    localized = localized.replace(/<h4>Newsletter<\/h4>/g, `<h4>${footerT.newsletter[lang]}</h4>`);
+    localized = localized.replace(/<h4>Contact Info<\/h4>/gi, `<h4>${footerT.contactInfo[lang]}</h4>`);
+    localized = localized.replace(/<h4>Quick Links<\/h4>/gi, `<h4>${footerT.quickLinks[lang]}</h4>`);
+    localized = localized.replace(/<h4>Quick links<\/h4>/gi, `<h4>${footerT.quickLinks[lang]}</h4>`);
+    localized = localized.replace(/<h4>Our Sectors<\/h4>/gi, `<h4>${footerT.ourSectors[lang]}</h4>`);
+    localized = localized.replace(/<h4>Services<\/h4>/gi, `<h4>${footerT.ourSectors[lang]}</h4>`);
+    localized = localized.replace(/<h4>Newsletter<\/h4>/gi, `<h4>${footerT.newsletter[lang]}</h4>`);
     localized = localized.replace(/Copyright 2026 BUYGOLD - All Rights Reserved\. Hosted on <a href="https:\/\/www\.buygold\.blog"[^>]*>www\.buygold\.blog<\/a>/g, footerT.copyright[lang]);
+
+    // Footer, breadcrumb, and drawer spans
+    localized = localized.replace(/<span>Home<\/span>/g, `<span>${navT.home[lang]}</span>`);
+    localized = localized.replace(/<span>Mining<\/span>/g, `<span>${navT.mining[lang]}</span>`);
+    localized = localized.replace(/<span>Agri-Business<\/span>/g, `<span>${navT.agri[lang]}</span>`);
+    localized = localized.replace(/<span>Agri Business<\/span>/g, `<span>${navT.agri[lang]}</span>`);
+    localized = localized.replace(/<span>Supply and Logistics<\/span>/g, `<span>${navT.logistics[lang]}</span>`);
+    localized = localized.replace(/<span>Engineering<\/span>/g, `<span>${navT.engineering[lang]}</span>`);
+    localized = localized.replace(/<span>About Us<\/span>/g, `<span>${navT.about[lang]}</span>`);
+    localized = localized.replace(/<span>Contact Us<\/span>/g, `<span>${navT.contact[lang]}</span>`);
+    localized = localized.replace(/>Fraud Disclaimer<\/a>/g, `>${navT.disclaimer[lang]}</a>`);
 
     // Schema.org inLanguage update
     localized = localized.replace(/"@context": "https:\/\/schema\.org"/g, `"@context": "https://schema.org",\n    "inLanguage": "${lang}"`);
+
+    // Apply comprehensive human-grade body content translations across all pages & sections
+    localized = applyBodyTranslations(localized, lang, pageName);
   }
 
   // 8. Inject / Update Language Switcher in .header-actions with bounded markers
