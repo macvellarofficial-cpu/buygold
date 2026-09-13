@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" width="280" height="64">
+  <defs>
+    <!-- Gold Gradients -->
+    <linearGradient id="goldGradientLight1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3C4" />
+      <stop offset="35%" stop-color="#F59E0B" />
+      <stop offset="70%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="goldGradientLight2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB" />
+      <stop offset="50%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#B45309" />
+    </linearGradient>
+    <linearGradient id="goldArrowLight" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D97706" />
+      <stop offset="50%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#FEF3C7" />
+    </linearGradient>
+    <linearGradient id="goldTextLight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="50%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+    <filter id="subtleDropLight" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- LOGO EMBLEM GROUP -->
+  <g transform="translate(4, 4)" filter="url(#subtleDropLight)">
+    <!-- Gold Bullion Bar 3D Isometric Faces -->
+    <polygon points="12,38 34,47 34,55 12,46" fill="url(#goldGradientLight2)" stroke="#B45309" stroke-width="0.5" />
+    <polygon points="34,47 48,36 48,44 34,55" fill="#92400E" stroke="#78350F" stroke-width="0.5" />
+    <polygon points="12,38 26,27 48,36 34,47" fill="url(#goldGradientLight1)" stroke="#F59E0B" stroke-width="0.5" />
+    
+    <!-- Stamp Mark on Top Face -->
+    <path d="M22,34 L32,38 M25,32 L35,36" stroke="#92400E" stroke-width="1.2" stroke-linecap="round" opacity="0.7" />
+
+    <!-- Upward Growth Arrow -->
+    <path d="M28,48 C38,46 47,38 50,22 C50.8,17.5 51.5,13 52,9" fill="none" stroke="url(#goldArrowLight)" stroke-width="4.5" stroke-linecap="round" />
+    <polygon points="52,2 43,15 50,13 56,19" fill="url(#goldGradientLight1)" stroke="#D97706" stroke-width="0.5" />
+    <path d="M32,46 C40,43 46,36 48,22" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" opacity="0.8" />
+  </g>
+
+  <!-- TYPOGRAPHY GROUP FOR DARK BACKGROUNDS -->
+  <g transform="translate(68, 0)">
+    <!-- Main Brand Name: BUY (Pure White) GOLD (Shimmering Gold) -->
+    <text x="0" y="38" font-family="'Outfit', sans-serif" font-size="34" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5">
+      BUY<tspan fill="url(#goldTextLight)" font-weight="800">GOLD</tspan>
+    </text>
+
+    <!-- Subtitle: INVESTMENTS with gold rules -->
+    <g transform="translate(1, 52)">
+      <line x1="0" y1="-4" x2="16" y2="-4" stroke="#FBBF24" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+      <text x="24" y="0" font-family="'Outfit', sans-serif" font-size="9" font-weight="700" fill="#F3F4F6" letter-spacing="3.8" opacity="0.95">
+        INVESTMENTS
+      </text>
+      <line x1="142" y1="-4" x2="158" y2="-4" stroke="#FBBF24" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+    </g>
+  </g>
+</svg>

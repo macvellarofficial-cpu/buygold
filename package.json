@@ -1,0 +1,19 @@
+{
+  "name": "alitihad-investments",
+  "version": "1.0.0",
+  "description": "Al' itihaad Investments - Official Website Clone",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "gold-mining",
+    "agri-business",
+    "logistics",
+    "engineering",
+    "uganda"
+  ],
+  "author": "Al' itihaad Investments",
+  "license": "ISC"
+}
