@@ -41,6 +41,7 @@ const items = [
   'ru',
   'fr',
   'sitemap.xml',
+  'sitemap.xsl',
   'robots.txt',
   'css',
   'js',

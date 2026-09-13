@@ -28,6 +28,7 @@ const MIME_TYPES = {
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
   '.xml': 'application/xml; charset=utf-8',
+  '.xsl': 'application/xml; charset=utf-8',
   '.txt': 'text/plain; charset=utf-8',
   '.woff': 'font/woff',
   '.woff2': 'font/woff2',
