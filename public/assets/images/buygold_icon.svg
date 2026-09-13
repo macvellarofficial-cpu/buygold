@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="favGold1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCE089" />
+      <stop offset="35%" stop-color="#DF9C27" />
+      <stop offset="70%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#B47312" />
+    </linearGradient>
+    <linearGradient id="favGold2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0B3" />
+      <stop offset="50%" stop-color="#EAA62B" />
+      <stop offset="100%" stop-color="#995D07" />
+    </linearGradient>
+    <linearGradient id="favArrow" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#B47312" />
+      <stop offset="50%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#FDE68A" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded soft dark navy square for high contrast icon presentation -->
+  <rect width="64" height="64" rx="14" fill="#002764" />
+
+  <!-- Gold Bullion Bar 3D Isometric Faces -->
+  <polygon points="12,40 33,48 33,56 12,48" fill="url(#favGold2)" stroke="#995D07" stroke-width="0.5" />
+  <polygon points="33,48 48,37 48,45 33,56" fill="#884d03" stroke="#683900" stroke-width="0.5" />
+  <polygon points="12,40 27,29 48,37 33,48" fill="url(#favGold1)" stroke="#d99824" stroke-width="0.5" />
+
+  <!-- Upward Growth Arrow -->
+  <path d="M28,49 C38,47 47,38 50,23 C50.8,18 51.5,13.5 52,9" fill="none" stroke="url(#favArrow)" stroke-width="4.5" stroke-linecap="round" />
+  <polygon points="52,2 43,15 50,13 56,19" fill="url(#favGold1)" stroke="#B47312" stroke-width="0.5" />
+</svg>

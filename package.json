@@ -1,0 +1,10 @@
+{
+  "name": "buygold-website",
+  "version": "1.0.0",
+  "description": "BUYGOLD - Official Corporate Website (www.buygold.blog)",
+  "scripts": {
+    "build": "node build.js",
+    "start": "node scripts/dev-server.js",
+    "dev": "node scripts/dev-server.js"
+  }
+}
