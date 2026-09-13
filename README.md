@@ -77,7 +77,8 @@ http://localhost:3000
 
 - **Website**: [www.buygold.blog](https://www.buygold.blog)
 - **Email**: [info@buygold.blog](mailto:info@buygold.blog)
-- **Phone**: [+256 754 681378](tel:+256754681378)
+- **Phone**: [+256 762 079 775](tel:+256762079775)
+- **WhatsApp**: [Chat on WhatsApp](https://wa.me/256762079775)
 - **Location**: Valley Close, Kiwatule Kampala, Uganda
 
 ---
