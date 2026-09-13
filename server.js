@@ -5,12 +5,15 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const ROOT = __dirname;
 
-// Instruct Vercel NFT bundler to trace and include all asset directories
+// Instruct Vercel NFT bundler to trace and include all asset directories and HTML pages
 try {
   if (fs.existsSync(path.join(__dirname, 'css'))) fs.readdirSync(path.join(__dirname, 'css'));
   if (fs.existsSync(path.join(__dirname, 'js'))) fs.readdirSync(path.join(__dirname, 'js'));
   if (fs.existsSync(path.join(__dirname, 'assets'))) fs.readdirSync(path.join(__dirname, 'assets'));
   if (fs.existsSync(path.join(__dirname, 'assets', 'images'))) fs.readdirSync(path.join(__dirname, 'assets', 'images'));
+  ['about-us.html', 'mining.html', 'agri-business.html', 'supply-and-logistics.html', 'engineering.html', 'contact-us.html', 'disclaimer.html'].forEach(f => {
+    if (fs.existsSync(path.join(__dirname, f))) fs.readFileSync(path.join(__dirname, f));
+  });
 } catch (e) {}
 
 const MIME_TYPES = {
