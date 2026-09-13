@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "BUYGOLD - Official Corporate Website (www.buygold.blog)",
   "scripts": {
+    "build": "echo 'Static build complete'",
     "start": "node dev-server.js",
     "dev": "node dev-server.js"
   },
